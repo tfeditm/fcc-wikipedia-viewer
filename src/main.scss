@@ -1,0 +1,368 @@
+/******************************
+BASE STYLE
+*******************************/
+
+$bold: 700;
+
+html {
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+
+  -webkit-box-sizing: border-box;
+
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+  outline: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+img,
+hr {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+html,
+body {
+  font-family: "Nunito", sans-serif;
+  font-size: 1rem;
+  line-height: 1.56;
+}
+
+h1 {
+  font-size: 3rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  padding-bottom: 1rem;
+}
+
+a,
+button,
+select,
+[type="submit"] {
+  cursor: pointer;
+}
+
+input,
+select {
+  width: 100%;
+  font-family: inherit;
+  font-weight: $bold;
+  color: inherit;
+}
+
+button {
+  font-weight: $bold;
+}
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+/******************************
+ELEMENT STYLE
+*******************************/
+
+.page-wrapper {
+  padding: 0 10%;
+  @media (min-width: 992px) {
+    padding: 0 15%;
+  }
+  @media (min-width: 1200px) {
+    padding: 0 20%;
+  }
+}
+
+.header,
+.main {
+  display: table;
+  width: 100%;
+  @media (min-width: 768px) {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+
+.header {
+  height: 20vh;
+}
+
+.main {
+  height: 60vh;
+}
+
+.content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+@mixin box($size) {
+  padding: 0.5rem 1.2rem;
+  font-size: $size + rem;
+  line-height: 1.56;
+  border-radius: 3rem;
+}
+
+.m-box {
+  @include box(1.2);
+}
+
+.s-box {
+  @include box(1);
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  margin-top: 1.56rem;
+  margin-bottom: 1.56rem;
+}
+
+.input-text {
+  width: 100%;
+  padding-right: 4rem;
+}
+
+.icon-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.select-arrow {
+  pointer-events: none;
+}
+
+@-webkit-keyframes happy {
+  from {
+    opacity: 0;
+    -webkit-transform: translate(-100vw, -100vh) scale(0.3, 0.3) rotate(-360deg);
+    transform: translate(-100vw, -100vh) scale(0.3, 0.3) rotate(-360deg);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes happy {
+  from {
+    opacity: 0;
+    -webkit-transform: translate(-100vw, -100vh) scale(0.3, 0.3) rotate(-360deg);
+    transform: translate(-100vw, -100vh) scale(0.3, 0.3) rotate(-360deg);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.random {
+  font-weight: $bold;
+  text-decoration: none;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  padding: 1rem 2rem;
+  border: 2px dotted;
+  border-radius: 0;
+  -webkit-transition: 0.5ms;
+  transition: 0.5ms;
+  -webkit-animation-name: happy;
+  animation-name: happy;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+}
+
+@mixin border-left($border-color: transparent) {
+  border-left: 0.5rem $border-color solid;
+  border-radius: 0;
+}
+
+.article {
+  margin-bottom: 1.2rem;
+  padding: 1rem 1.2rem;
+  line-height: 1.56;
+  @include border-left;
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+%nav-button-margin {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+.prev {
+  float: left;
+  @extend %nav-button-margin;
+}
+
+.next {
+  float: right;
+  @extend %nav-button-margin;
+}
+
+.searchmatch {
+  font-weight: $bold;
+}
+
+/******************************
+COLORS
+*******************************/
+
+/*
+colorpalette: http://paletton.com/#uid=50q0u0ka3uO10Pk3jB2akoYeKkZ
+*/
+
+$primary-color: rgb(131, 105, 57);
+$secundary-color: rgb(217, 192, 162);
+
+$primary-button-color: rgb(68, 0, 38);
+$secundary-button-color: rgb(136, 45, 96);
+
+$dark-color: #050505;
+
+body {
+  background-color: $dark-color;
+}
+
+header {
+  color: $secundary-color;
+}
+
+@mixin box-style($bg-color) {
+  background-color: $bg-color;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+@mixin box-hover-style($bg-hover-color) {
+  background-color: $bg-hover-color;
+  -webkit-box-shadow: 0 0 .5rem 1px $bg-hover-color;
+  box-shadow: 0 0 .5rem 1px $bg-hover-color;
+}
+
+.input-container {
+  color: $secundary-color;
+  &:hover,
+  &:focus,
+  &:active {
+    color: $primary-color;
+  }
+}
+
+.input-colors {
+  @include box-style($primary-color);
+  color: $secundary-color;
+  &:hover,
+  &:focus,
+  &:active {
+    @include box-hover-style($secundary-color);
+    color: $primary-color;
+  }
+}
+
+.button {
+  color: $secundary-color;
+  @include box-style($primary-button-color);
+  &:hover,
+  &:active {
+    color: $primary-button-color;
+    @include box-hover-style($secundary-button-color);
+  }
+  &:active {
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+  }
+}
+
+.random {
+  color: $primary-color;
+  border-color: $primary-color;
+  &:hover {
+    color: $secundary-button-color;
+    border-color: $secundary-button-color;
+  }
+}
+
+.article {
+  color: $primary-color;
+  &:hover,
+  &:focus,
+  &:active {
+    color: $secundary-color;
+    @include border-left($primary-button-color);
+    cursor: pointer;
+  }
+  a {
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+    }
+  }
+}
+
+.no-result {
+  color: $primary-color;
+}
+
+/******************************
+HELPER CLASSES
+*******************************/
+
+.text-center {
+  text-align: center;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
