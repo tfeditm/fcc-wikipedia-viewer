@@ -1,7 +1,5 @@
 "use strict";
 // DEFINING THE BASE URLs
-//let enBaseUrl = "https://en.wikipedia.org";
-//let huBaseUrl = "https://hu.wikipedia.org";
 var startUrl = "https://";
 var baseUrl = ".wikipedia.org";
 var setSearchUrl = "/w/api.php?action=query&list=search&srprop=snippet&format=json&formatversion=latest&origin=*&continue=sroffset%7C%7C";
@@ -11,6 +9,7 @@ var url;
 var maxNumberOfArticle = 10;
 // GRAB REFERENCES TO ALL THE DOM ELEMENTS WE'LL NEED TO MANIPULATE
 var searchTerm = document.querySelector("#search-input-text");
+var searchTermContainer = document.querySelector("#search-input-text-container");
 var searchForm = document.querySelector("#search-form");
 var submitBtn = document.querySelector("#search-submit-button");
 var clearInputTextButton = document.querySelector("#clear-input-text-button");
@@ -19,11 +18,11 @@ var articles = document.querySelector("#articles");
 var pager = document.querySelector("#pager");
 var prevButton = document.querySelector("#prevButton");
 var nextButton = document.querySelector("#nextButton");
-console.log("alma");
-console.log(searchTerm.value);
 // EVENT LISTENERS TO CONTROL THE FUNCTIONALITY
 searchForm.addEventListener("submit", submitSearch);
 searchTerm.addEventListener("keyup", toggleClearInputTextButton);
+searchTerm.addEventListener("focus", searchTermFocus);
+searchTerm.addEventListener("blur", searchTermBlur);
 clearInputTextButton.addEventListener("click", clearInputText);
 prevButton.addEventListener("click", previousPage);
 nextButton.addEventListener("click", nextPage);
@@ -32,12 +31,9 @@ function validateResponse(response) {
     if (!response.ok) {
         throw Error(response.status.text);
     }
-    console.log("response ok");
-    console.log("validate response = " + response);
     return response;
 }
 function getResponseAsJSON(response) {
-    console.log("get response = " + response);
     return response.json();
 }
 function workWithResult(result) {
@@ -45,9 +41,7 @@ function workWithResult(result) {
     console.log("call displayResult");
 }
 function logError(error) {
-    //console.log(JSON.parse(JSON.stringify(error)));
     console.log(error);
-    console.log("hiba van?");
 }
 function fetchJSON(pathToResource) {
     fetch(pathToResource)
@@ -58,9 +52,6 @@ function fetchJSON(pathToResource) {
 }
 // DISPLAY THE RESULTS
 function displayResults(data) {
-    console.log("barack");
-    console.log(data);
-    console.log(data.query.search.length);
     while (articles.firstChild) {
         articles.removeChild(articles.firstChild);
     }
@@ -92,7 +83,6 @@ function displayResults(data) {
         para.textContent = "Sorry, no results returned :(";
         para.classList.add("no-result", "text-center");
         articles.appendChild(para);
-        console.log(para);
         nextButton.classList.add("hidden");
     }
 }
@@ -139,4 +129,11 @@ function clearInputText() {
     searchTerm.value = "";
     searchTerm.focus();
     clearInputTextButton.classList.add("hidden");
+}
+// ADD AND REMOVE HOVER STYLE ON SEARCH-INPUT-TEXT-CONTAINER
+function searchTermFocus() {
+    searchTermContainer.classList.add("input-container-hover");
+}
+function searchTermBlur() {
+    searchTermContainer.classList.remove("input-container-hover");
 }

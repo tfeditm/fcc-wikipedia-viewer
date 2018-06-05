@@ -46,12 +46,35 @@ select,
 [type="submit"] {
   cursor: pointer; }
 
-input,
-select {
+[type="submit"], select,
+input:not([type="submit"]) {
   width: 100%;
   font-family: inherit;
-  font-weight: 700;
-  color: inherit; }
+  font-weight: 700; }
+
+select,
+input:not([type="submit"]), select input + span,
+select select + span,
+input:not([type="submit"]) input + span,
+input:not([type="submit"]) select + span, select input + span:focus, select input + span:hover, select input + span:active,
+select select + span:focus,
+select select + span:hover,
+select select + span:active,
+input:not([type="submit"]) input + span:focus,
+input:not([type="submit"]) input + span:hover,
+input:not([type="submit"]) input + span:active,
+input:not([type="submit"]) select + span:focus,
+input:not([type="submit"]) select + span:hover,
+input:not([type="submit"]) select + span:active, select:focus, select:hover, select:active,
+input:not([type="submit"]):focus,
+input:not([type="submit"]):hover,
+input:not([type="submit"]):active {
+  color: inherit;
+  background-color: inherit; }
+
+[type="submit"] {
+  text-transform: uppercase;
+  letter-spacing: .1rem; }
 
 button {
   font-weight: 700; }
@@ -113,7 +136,8 @@ ELEMENT STYLE
   line-height: 1.56;
   border-radius: 3rem; }
 
-.container {
+.input-container {
+  border-radius: 3rem;
   position: relative;
   width: 100%;
   margin-top: 1.56rem;
@@ -195,37 +219,36 @@ COLORS
 colorpalette: http://paletton.com/#uid=50q0u0ka3uO10Pk3jB2akoYeKkZ
 */
 body {
-  background-color: #050505; }
+  background-color: #10070c; }
 
 header {
   color: #d9c0a2; }
 
 .input-container {
-  color: #d9c0a2; }
-  .input-container:hover, .input-container:focus, .input-container:active {
-    color: #836939; }
-
-.input-colors {
   background-color: #836939;
   -webkit-transition: 0.3s;
   transition: 0.3s;
   color: #d9c0a2; }
-  .input-colors:hover, .input-colors:focus, .input-colors:active {
-    background-color: #d9c0a2;
-    -webkit-box-shadow: 0 0 0.5rem 1px #d9c0a2;
-    box-shadow: 0 0 0.5rem 1px #d9c0a2;
-    color: #836939; }
+
+.input-container-hover,
+.input-container:hover,
+.input-container:focus,
+.input-container:active {
+  background-color: #d9c0a2;
+  -webkit-box-shadow: 0 0 0.8rem 1px #d9c0a2;
+  box-shadow: 0 0 0.8rem 1px #d9c0a2;
+  color: #836939; }
 
 .button {
-  color: #d9c0a2;
+  color: #aa005f;
   background-color: #440026;
   -webkit-transition: 0.3s;
   transition: 0.3s; }
   .button:hover, .button:active {
     color: #440026;
-    background-color: #882d60;
-    -webkit-box-shadow: 0 0 0.5rem 1px #882d60;
-    box-shadow: 0 0 0.5rem 1px #882d60; }
+    background-color: #aa005f;
+    -webkit-box-shadow: 0 0 0.8rem 1px #aa005f;
+    box-shadow: 0 0 0.8rem 1px #aa005f; }
   .button:active {
     -webkit-transform: scale(0.95);
     transform: scale(0.95); }
@@ -234,8 +257,8 @@ header {
   color: #836939;
   border-color: #836939; }
   .random:hover {
-    color: #882d60;
-    border-color: #882d60; }
+    color: #aa005f;
+    border-color: #aa005f; }
 
 .article {
   color: #836939; }

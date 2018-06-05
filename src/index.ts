@@ -12,6 +12,7 @@ let maxNumberOfArticle:number = 10;
 
 // GRAB REFERENCES TO ALL THE DOM ELEMENTS WE'LL NEED TO MANIPULATE
 let searchTerm:any = document.querySelector("#search-input-text");
+let searchTermContainer:any = document.querySelector("#search-input-text-container");
 let searchForm:any = document.querySelector("#search-form");
 let submitBtn:any = document.querySelector("#search-submit-button");
 let clearInputTextButton:any = document.querySelector("#clear-input-text-button");
@@ -21,9 +22,12 @@ let pager: any = document.querySelector("#pager");
 let prevButton:any = document.querySelector("#prevButton");
 let nextButton:any = document.querySelector("#nextButton");
 
+
 // EVENT LISTENERS TO CONTROL THE FUNCTIONALITY
 searchForm.addEventListener("submit", submitSearch);
 searchTerm.addEventListener("keyup", toggleClearInputTextButton);
+searchTerm.addEventListener("focus", searchTermFocus);
+searchTerm.addEventListener("blur", searchTermBlur);
 clearInputTextButton.addEventListener("click", clearInputText);
 prevButton.addEventListener("click", previousPage);
 nextButton.addEventListener("click", nextPage);
@@ -152,5 +156,14 @@ function clearInputText() {
   searchTerm.value = "";
   searchTerm.focus();
   clearInputTextButton.classList.add("hidden");
+}
+
+// ADD AND REMOVE HOVER STYLE ON SEARCH-INPUT-TEXT-CONTAINER
+function searchTermFocus() {
+  searchTermContainer.classList.add("input-container-hover");
+}
+
+function searchTermBlur() {
+  searchTermContainer.classList.remove("input-container-hover");
 }
 
