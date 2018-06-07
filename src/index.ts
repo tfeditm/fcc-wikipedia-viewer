@@ -25,7 +25,6 @@ let maxNumberOfArticle = 10;
 // GRAB REFERENCES TO ALL THE DOM ELEMENTS WE'LL NEED TO MANIPULATE
 // **************************************************** //
 let searchTerm = document.querySelector("#search-input-text") as HTMLInputElement;
-let searchTermContainer = document.querySelector("#search-input-text-container") as HTMLElement;
 let searchForm = document.querySelector("#search-form") as HTMLFormElement;
 let submitBtn = document.querySelector("#search-submit-button") as HTMLInputElement;
 let clearInputTextButton = document.querySelector("#clear-input-text-button") as HTMLElement;
@@ -39,9 +38,9 @@ let nextButton = document.querySelector("#nextButton") as HTMLButtonElement;
 // EVENT LISTENERS TO CONTROL THE FUNCTIONALITY
 // **************************************************** //
 searchForm.addEventListener("submit", submitSearch);
+searchForm.addEventListener("focusin", searchFormFocusin);
+searchForm.addEventListener("focusout", searchFormFocusout);
 searchTerm.addEventListener("keyup", toggleClearInputTextButton);
-searchTerm.addEventListener("focus", searchTermFocus);
-searchTerm.addEventListener("blur", searchTermBlur);
 clearInputTextButton.addEventListener("click", clearInputText);
 prevButton.addEventListener("click", previousPage);
 nextButton.addEventListener("click", nextPage);
@@ -97,7 +96,6 @@ function fetchResults(e: any) {
 // **************************************************** //
 // Successful search
   function displayArticles(article: any): void {
-    let articleBox = document.createElement("div");
     let link = document.createElement("a");
     let title = document.createElement("h3");
     let desc = document.createElement("p");
@@ -107,12 +105,11 @@ function fetchResults(e: any) {
     title.textContent = article.title;
     desc.innerHTML = article.snippet;
 
-    articleBox.setAttribute("class", "article");
+    link.setAttribute("class", "article");
 
     link.appendChild(title);
     link.appendChild(desc);
-    articleBox.appendChild(link);
-    articles.appendChild(articleBox);
+    articles.appendChild(link);
   }
 
   // Unsuccessful search
@@ -131,7 +128,7 @@ function displayResults(data: any) {
 
   if(data.query === undefined) {
     return
-    
+
   } else {
     while (articles.firstChild) {
       articles.removeChild(articles.firstChild);
@@ -164,6 +161,7 @@ function submitSearch(e: any) {
   fetchResults(e);
 }
 
+
 // ADD FUNCTIONALITY TO THE PAGER
 // **************************************************** //
 function nextPage(e:any) {
@@ -172,6 +170,7 @@ function nextPage(e:any) {
   prevButton.classList.remove("hidden");
 }
 
+
 function previousPage(e:any) {
   sroffset -= maxNumberOfArticle;
   fetchResults(e);
@@ -179,6 +178,7 @@ function previousPage(e:any) {
     prevButton.classList.add("hidden");
   }
 }
+
 
 // SHOW OR HIDE THE "CLEAR INPUT TEXT" BUTTON
 // **************************************************** //
@@ -190,6 +190,7 @@ function toggleClearInputTextButton() {
   }
 }
 
+
 // CLEAR THE TEXT OF INPUT FIELD
 // **************************************************** //
 function clearInputText() {
@@ -198,13 +199,19 @@ function clearInputText() {
   clearInputTextButton.classList.add("hidden");
 }
 
-// ADD AND REMOVE HOVER STYLE ON SEARCH-INPUT-TEXT-CONTAINER
+
+// ADD AND REMOVE THE HOVER STYLE OF INPUT-CONTAINER
 // **************************************************** //
-function searchTermFocus() {
-  searchTermContainer.classList.add("input-container-hover");
+function searchFormFocusin(event: any) {
+  let f = event.target;
+  if(f && (f.nodeName === "SELECT" || (f.nodeName === "INPUT" && f.type !== "submit"))) {
+    f.parentElement.classList.add("input-container-hover");
+  }
 }
 
-function searchTermBlur() {
-  searchTermContainer.classList.remove("input-container-hover");
+function searchFormFocusout(event: any) {
+  let f = event.target;
+  if(f && (f.nodeName === "SELECT" || (f.nodeName === "INPUT" && f.type !== "submit"))) {
+    f.parentElement.classList.remove("input-container-hover");
+  }
 }
-

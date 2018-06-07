@@ -31,10 +31,15 @@ body {
   font-size: 1rem;
   line-height: 1.56; }
 
+header {
+  padding-top: 1rem;
+  padding-bottom: 1rem; }
+
 h1 {
   font-size: 3rem;
-  padding-top: 3rem;
-  padding-bottom: 3rem; }
+  font-weight: 900;
+  padding-top: 1rem;
+  padding-bottom: 1rem; }
 
 h3 {
   font-size: 1.2rem;
@@ -74,12 +79,13 @@ input:not([type="submit"]):active {
 
 [type="submit"] {
   text-transform: uppercase;
-  letter-spacing: .1rem; }
+  letter-spacing: .1rem;
+  font-weight: 900; }
 
 button {
   font-weight: 700; }
 
-select {
+select, input {
   -moz-appearance: none;
   -webkit-appearance: none;
   -o-appearance: none;
@@ -91,6 +97,9 @@ select:-moz-focusring {
 
 select::-ms-expand {
   display: none; }
+
+input::-ms-clear {
+  color: transparent; }
 
 /******************************
 ELEMENT STYLE
@@ -124,14 +133,27 @@ ELEMENT STYLE
   display: table-cell;
   vertical-align: middle; }
 
+.input-wrapper {
+  position: relative; }
+
+.search-label {
+  position: absolute;
+  top: -1.2rem;
+  left: 0;
+  right: 0;
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .1rem; }
+
 .m-box {
-  padding: 0.5rem 1.2rem;
+  padding: .6rem 1.2rem;
   font-size: 1.2rem;
   line-height: 1.56;
   border-radius: 3rem; }
 
 .s-box {
-  padding: 0.5rem 1.2rem;
+  padding: .6rem 1.2rem;
   font-size: 1rem;
   line-height: 1.56;
   border-radius: 3rem; }
@@ -140,8 +162,8 @@ ELEMENT STYLE
   border-radius: 3rem;
   position: relative;
   width: 100%;
-  margin-top: 1.56rem;
-  margin-bottom: 1.56rem; }
+  margin-top: 2rem;
+  margin-bottom: 2rem; }
 
 .input-text {
   width: 100%;
@@ -190,14 +212,12 @@ ELEMENT STYLE
   animation-duration: 1s; }
 
 .article {
+  display: block;
   margin-bottom: 1.2rem;
   padding: 1rem 1.2rem;
-  line-height: 1.56;
+  text-decoration: none;
   border-left: 0.5rem transparent solid;
   border-radius: 0; }
-  .article a {
-    text-decoration: none;
-    color: inherit; }
 
 .prev, .next {
   margin-top: 2rem;
@@ -224,6 +244,9 @@ body {
 header {
   color: #d9c0a2; }
 
+.search-label {
+  color: rgba(131, 105, 57, 0.4); }
+
 .input-container {
   background-color: #836939;
   -webkit-transition: 0.3s;
@@ -232,8 +255,7 @@ header {
 
 .input-container-hover,
 .input-container:hover,
-.input-container:focus,
-.input-container:active {
+.input-container:focus {
   background-color: #d9c0a2;
   -webkit-box-shadow: 0 0 0.8rem 1px #d9c0a2;
   box-shadow: 0 0 0.8rem 1px #d9c0a2;
@@ -244,7 +266,7 @@ header {
   background-color: #440026;
   -webkit-transition: 0.3s;
   transition: 0.3s; }
-  .button:hover, .button:active {
+  .button:hover, .button:focus, .button:active {
     color: #440026;
     background-color: #aa005f;
     -webkit-box-shadow: 0 0 0.8rem 1px #aa005f;
@@ -256,9 +278,14 @@ header {
 .random {
   color: #836939;
   border-color: #836939; }
-  .random:hover {
+  .random:hover, .random:focus {
+    -webkit-box-shadow: 0 0 0.8rem 1px #aa005f;
+    box-shadow: 0 0 0.8rem 1px #aa005f;
     color: #aa005f;
     border-color: #aa005f; }
+  .random:active {
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95); }
 
 .article {
   color: #836939; }
@@ -266,8 +293,7 @@ header {
     color: #d9c0a2;
     border-left: 0.5rem #440026 solid;
     border-radius: 0;
-    cursor: pointer; }
-  .article a:hover, .article a:focus, .article a:active {
+    cursor: pointer;
     text-decoration: none; }
 
 .no-result {

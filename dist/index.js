@@ -18,7 +18,6 @@ var maxNumberOfArticle = 10;
 // GRAB REFERENCES TO ALL THE DOM ELEMENTS WE'LL NEED TO MANIPULATE
 // **************************************************** //
 var searchTerm = document.querySelector("#search-input-text");
-var searchTermContainer = document.querySelector("#search-input-text-container");
 var searchForm = document.querySelector("#search-form");
 var submitBtn = document.querySelector("#search-submit-button");
 var clearInputTextButton = document.querySelector("#clear-input-text-button");
@@ -30,9 +29,9 @@ var nextButton = document.querySelector("#nextButton");
 // EVENT LISTENERS TO CONTROL THE FUNCTIONALITY
 // **************************************************** //
 searchForm.addEventListener("submit", submitSearch);
+searchForm.addEventListener("focusin", searchFormFocusin);
+searchForm.addEventListener("focusout", searchFormFocusout);
 searchTerm.addEventListener("keyup", toggleClearInputTextButton);
-searchTerm.addEventListener("focus", searchTermFocus);
-searchTerm.addEventListener("blur", searchTermBlur);
 clearInputTextButton.addEventListener("click", clearInputText);
 prevButton.addEventListener("click", previousPage);
 nextButton.addEventListener("click", nextPage);
@@ -76,7 +75,6 @@ function fetchResults(e) {
 // **************************************************** //
 // Successful search
 function displayArticles(article) {
-    var articleBox = document.createElement("div");
     var link = document.createElement("a");
     var title = document.createElement("h3");
     var desc = document.createElement("p");
@@ -84,11 +82,10 @@ function displayArticles(article) {
     link.target = "_blank";
     title.textContent = article.title;
     desc.innerHTML = article.snippet;
-    articleBox.setAttribute("class", "article");
+    link.setAttribute("class", "article");
     link.appendChild(title);
     link.appendChild(desc);
-    articleBox.appendChild(link);
-    articles.appendChild(articleBox);
+    articles.appendChild(link);
 }
 // Unsuccessful search
 function displayNoArticle() {
@@ -161,11 +158,17 @@ function clearInputText() {
     searchTerm.focus();
     clearInputTextButton.classList.add("hidden");
 }
-// ADD AND REMOVE HOVER STYLE ON SEARCH-INPUT-TEXT-CONTAINER
+// ADD AND REMOVE THE HOVER STYLE OF INPUT-CONTAINER
 // **************************************************** //
-function searchTermFocus() {
-    searchTermContainer.classList.add("input-container-hover");
+function searchFormFocusin(event) {
+    var f = event.target;
+    if (f && (f.nodeName === "SELECT" || (f.nodeName === "INPUT" && f.type !== "submit"))) {
+        f.parentElement.classList.add("input-container-hover");
+    }
 }
-function searchTermBlur() {
-    searchTermContainer.classList.remove("input-container-hover");
+function searchFormFocusout(event) {
+    var f = event.target;
+    if (f && (f.nodeName === "SELECT" || (f.nodeName === "INPUT" && f.type !== "submit"))) {
+        f.parentElement.classList.remove("input-container-hover");
+    }
 }

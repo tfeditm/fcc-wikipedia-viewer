@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FCC project: Wikipedia Viewer</title>
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&amp;subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV"
@@ -27,21 +27,26 @@
         <section class="main">
             <main class="content controls text-center">
                 <form id="search-form" class="search-form" role="search">
-                    <div class="input-container">
-                        <select name="languages" id="lang-selector" class="m-box d-block input-colors">
-                            <option value="en">English</option>
-                            <option value="hu">Magyar</option>
-                        </select>
-                        <span class="m-box d-inline-block icon-right select-arrow">
-                            <i class="fas fa-angle-double-down"></i>
-                        </span>
+                    <div class="input-wrapper">
+                        <label for="lang-selector" class="search-label">search language</label>
+                        <div class="input-container">
+                            <select name="languages" id="lang-selector" class="m-box d-block input-colors">
+                                <option value="en">English</option>
+                                <option value="hu">Magyar</option>
+                            </select>
+                            <span class="m-box d-inline-block icon-right select-arrow">
+                                <i class="fas fa-angle-double-down"></i>
+                            </span>
+                        </div>
                     </div>
-                    <div id="search-input-text-container" class="input-container">
-                        <input type="text" id="search-input-text" class="m-box d-block input-text input-colors" placeholder="Search in Wikipedia"
-                            autofocus>
-                        <span id="clear-input-text-button" class="m-box d-inline-block icon-right hidden">
-                            <i class="fas fa-times"></i>
-                        </span>
+                    <div class="input-wrapper">
+                        <label for="search-input-text" class="search-label">search term</label>
+                        <div id="search-input-text-container" class="input-container">
+                            <input type="text" id="search-input-text" class="m-box d-block input-text input-colors" autofocus>
+                            <span id="clear-input-text-button" class="m-box d-inline-block icon-right hidden">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </div>
                     </div>
                     <input type="submit" value="Search" id="search-submit-button" class="m-box d-block button">
                 </form>

@@ -3,6 +3,7 @@ BASE STYLE
 *******************************/
 
 $bold: 700;
+$extra-bold: 900;
 $border-radius: 3rem;
 
 html {
@@ -41,10 +42,16 @@ body {
   line-height: 1.56;
 }
 
+header {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 h1 {
   font-size: 3rem;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  font-weight: $extra-bold;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 h3 {
@@ -74,6 +81,7 @@ select,
   @extend %select-input-basic;
   text-transform: uppercase;
   letter-spacing: .1rem;
+  font-weight: $extra-bold;
 }
 
 select,
@@ -100,7 +108,7 @@ button {
   font-weight: $bold;
 }
 
-select {
+select, input {
   -moz-appearance: none;
   -webkit-appearance: none;
   -o-appearance: none;
@@ -115,6 +123,11 @@ select:-moz-focusring {
 select::-ms-expand {
   display: none;
 }
+
+input::-ms-clear {
+  color: transparent;
+}
+
 
 /******************************
 ELEMENT STYLE
@@ -153,8 +166,23 @@ ELEMENT STYLE
   vertical-align: middle;
 }
 
+.input-wrapper {
+  position: relative;
+}
+
+.search-label {
+  position: absolute;
+  top: -1.2rem;
+  left: 0;
+  right: 0;
+  font-size: 1.2rem;
+  font-weight: $extra-bold;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+}
+
 @mixin box($size) {
-  padding: 0.5rem 1.2rem;
+  padding: .6rem 1.2rem;
   font-size: $size + rem;
   line-height: 1.56;
   border-radius: $border-radius;
@@ -172,8 +200,8 @@ ELEMENT STYLE
   border-radius: $border-radius;
   position: relative;
   width: 100%;
-  margin-top: 1.56rem;
-  margin-bottom: 1.56rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .input-text {
@@ -238,14 +266,11 @@ ELEMENT STYLE
 }
 
 .article {
+  display: block;
   margin-bottom: 1.2rem;
   padding: 1rem 1.2rem;
-  line-height: 1.56;
+  text-decoration: none;
   @include border-left;
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
 }
 
 %nav-button-margin {
@@ -275,11 +300,13 @@ COLORS
 colorpalette: http://paletton.com/#uid=50q0u0ka3uO10Pk3jB2akoYeKkZ
 */
 
-$primary-color: rgb(131, 105, 57);
-$secundary-color: rgb(217, 192, 162);
+$primary-color: rgba(131, 105, 57, 1);
+$secundary-color: rgba(217, 192, 162, 1);
 
-$primary-button-color: rgb(68, 0, 38);
+$primary-button-color: rgba(68, 0, 38, 1);
 $secundary-button-color: lighten($primary-button-color, 20%);
+
+$label-color: fade-out($primary-color, .6);
 
 $dark-color: #10070c;
 
@@ -291,16 +318,25 @@ header {
   color: $secundary-color;
 }
 
+
+.search-label {
+  color: $label-color;
+}
+
 @mixin box-style($bg-color) {
   background-color: $bg-color;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
+@mixin box-hover-shadow($shadow-color) {
+  -webkit-box-shadow: 0 0 .8rem 1px $shadow-color;
+  box-shadow: 0 0 .8rem 1px $shadow-color;
+}
+
 @mixin box-hover-style($bg-hover-color) {
   background-color: $bg-hover-color;
-  -webkit-box-shadow: 0 0 .8rem 1px $bg-hover-color;
-  box-shadow: 0 0 .8rem 1px $bg-hover-color;
+  @include box-hover-shadow($bg-hover-color);
 }
 
 .input-container {
@@ -310,50 +346,57 @@ header {
 
 .input-container-hover,
 .input-container:hover,
-.input-container:focus,
-.input-container:active {
+.input-container:focus
+// ,
+// .input-container:focus-within
+ {
   @include box-hover-style($secundary-color);
   color: $primary-color;
+}
+
+@mixin button-active {
+  -webkit-transform: scale(0.95);
+  transform: scale(0.95);
 }
 
 .button {
   color: $secundary-button-color;
   @include box-style($primary-button-color);
   &:hover,
+  &:focus,
   &:active {
     color: $primary-button-color;
     @include box-hover-style($secundary-button-color);
   }
   &:active {
-    -webkit-transform: scale(0.95);
-    transform: scale(0.95);
+    @include button-active();
   }
 }
 
 .random {
   color: $primary-color;
   border-color: $primary-color;
-  &:hover {
+  &:hover,
+  &:focus {
+    @include box-hover-shadow($secundary-button-color);
     color: $secundary-button-color;
     border-color: $secundary-button-color;
+  }
+  &:active {
+    @include button-active();
   }
 }
 
 .article {
   color: $primary-color;
   &:hover,
+  // &:focus-within,
   &:focus,
   &:active {
     color: $secundary-color;
     @include border-left($primary-button-color);
     cursor: pointer;
-  }
-  a {
-    &:hover,
-    &:focus,
-    &:active {
-      text-decoration: none;
-    }
+    text-decoration: none;
   }
 }
 
