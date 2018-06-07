@@ -202,16 +202,25 @@ function clearInputText() {
 
 // ADD AND REMOVE THE HOVER STYLE OF INPUT-CONTAINER
 // **************************************************** //
-function searchFormFocusin(event: any) {
-  let f = event.target;
-  if(f && (f.nodeName === "SELECT" || (f.nodeName === "INPUT" && f.type !== "submit"))) {
-    f.parentElement.classList.add("input-container-hover");
+class ToggleHoverStyle {
+  toggle: string;
+  event: any;
+  constructor (toggle: string, event: any) {
+    this.toggle = toggle;
+    this.event = event;
+    let f = this.event.target;
+    if(f && (f.nodeName === "SELECT" || (f.nodeName === "INPUT" && f.type !== "submit"))) {
+      f.parentElement.classList.toggle("input-container-hover");
+    }
   }
 }
 
-function searchFormFocusout(event: any) {
-  let f = event.target;
-  if(f && (f.nodeName === "SELECT" || (f.nodeName === "INPUT" && f.type !== "submit"))) {
-    f.parentElement.classList.remove("input-container-hover");
-  }
+function searchFormFocusin(event: any) {
+  new ToggleHoverStyle("add", event);
 }
+
+function searchFormFocusout(event: any) {
+  new ToggleHoverStyle("remove", event);
+}
+
+
