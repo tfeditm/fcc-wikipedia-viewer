@@ -58,19 +58,7 @@ input:not([type="submit"]) {
   font-weight: 700; }
 
 select,
-input:not([type="submit"]), select input + span,
-select select + span,
-input:not([type="submit"]) input + span,
-input:not([type="submit"]) select + span, select input + span:focus, select input + span:hover, select input + span:active,
-select select + span:focus,
-select select + span:hover,
-select select + span:active,
-input:not([type="submit"]) input + span:focus,
-input:not([type="submit"]) input + span:hover,
-input:not([type="submit"]) input + span:active,
-input:not([type="submit"]) select + span:focus,
-input:not([type="submit"]) select + span:hover,
-input:not([type="submit"]) select + span:active, select:focus, select:hover, select:active,
+input:not([type="submit"]), select:focus, select:hover, select:active,
 input:not([type="submit"]):focus,
 input:not([type="submit"]):hover,
 input:not([type="submit"]):active {
@@ -113,20 +101,20 @@ ELEMENT STYLE
     .page-wrapper {
       padding: 0 20%; } }
 
-.header,
-.main {
+.header-wrapper,
+.main-wrapper {
   display: table;
   width: 100%; }
   @media (min-width: 768px) {
-    .header,
-    .main {
+    .header-wrapper,
+    .main-wrapper {
       padding-left: 10%;
       padding-right: 10%; } }
 
-.header {
+.header-wrapper {
   height: 20vh; }
 
-.main {
+.main-wrapper {
   height: 60vh; }
 
 .content {

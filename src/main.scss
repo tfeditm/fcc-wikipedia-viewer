@@ -88,15 +88,6 @@ select,
 input:not([type="submit"]) {
   @extend %select-input-basic;
   @extend %select-input-colors;
-  input + span,
-  select + span {
-    @extend %select-input-colors;
-    &:focus,
-    &:hover,
-    &:active {
-      @extend %select-input-colors;
-    }
-  }
   &:focus,
   &:hover,
   &:active {
@@ -143,8 +134,8 @@ ELEMENT STYLE
   }
 }
 
-.header,
-.main {
+.header-wrapper,
+.main-wrapper {
   display: table;
   width: 100%;
   @media (min-width: 768px) {
@@ -153,11 +144,11 @@ ELEMENT STYLE
   }
 }
 
-.header {
+.header-wrapper {
   height: 20vh;
 }
 
-.main {
+.main-wrapper {
   height: 60vh;
 }
 
@@ -346,10 +337,7 @@ header {
 
 .input-container-hover,
 .input-container:hover,
-.input-container:focus
-// ,
-// .input-container:focus-within
- {
+.input-container:focus {
   @include box-hover-style($secundary-color);
   color: $primary-color;
 }
@@ -390,7 +378,6 @@ header {
 .article {
   color: $primary-color;
   &:hover,
-  // &:focus-within,
   &:focus,
   &:active {
     color: $secundary-color;
