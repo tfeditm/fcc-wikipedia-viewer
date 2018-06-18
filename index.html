@@ -17,14 +17,14 @@
 
 <body>
     <div class="page-wrapper">
-        <section class="header">
+        <div class="header-wrapper">
             <header class="content text-center">
                 <h1 class="page-title">Wikipedia Viewer</h1>
                 <p class="sub-title">Search for page titles or content matching your input text.</p>
                 <p>You can choose language to search for content.</p>
             </header>
-        </section>
-        <section class="main">
+        </div>
+        <div class="main-wrapper">
             <main class="content controls text-center">
                 <form id="search-form" class="search-form" role="search">
                     <div class="input-wrapper">
@@ -52,14 +52,14 @@
                 </form>
                 <a class="d-inline-block random" href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">I'm so curious, show me a random article!</a>
             </main>
-        </section>
-        <section class="results">
-            <section id="articles" class="articles"></section>
+        </div>
+        <div class="results-wrapper">
+            <div id="articles" class="articles"></div>
             <nav id="pager" class="pager clearfix hidden">
                 <button id="prevButton" class="s-box button prev hidden">Previous 10</button>
                 <button id="nextButton" class="s-box button next hidden">Next 10</button>
             </nav>
-        </section>
+        </div>
     </div>
     <script src="dist/index.js"></script>
 </body>
